@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="plugin" group="pcs" method="upgrade" version="5.0">
+	<name>plg_pcs_shipping_dpd</name>
+	<author>Jan Pavelka (www.phoca.cz)</author>
+	<creationDate>04/09/2025</creationDate>
+	<authorEmail></authorEmail>
+	<authorUrl>https://www.phoca.cz</authorUrl>
+	<copyright>Jan Pavelka</copyright>
+	<license>GNU/GPL</license>
+	<version>5.0.0</version>
+	<description>PLG_PCS_SHIPPING_DPD_DESCRIPTION</description>
+	<projectName>PhocaCartShippingDpdPlugin</projectName>
+
+	<media destination="plg_pcs_shipping_dpd" folder="media">
+		<folder>css</folder>
+		<folder>js</folder>
+	</media>
+
+	<files>
+		<folder>tmpl</folder>
+		<folder>helpers</folder>
+		<filename plugin="shipping_dpd">index.html</filename>
+		<filename plugin="shipping_dpd">shipping_dpd.php</filename>
+		<filename plugin="shipping_dpd">manifest.xml</filename>
+	</files>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pcs_shipping_dpd.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_pcs_shipping_dpd.sys.ini</language>
+	</languages>
+
+	<administration>
+		<languages>
+			<language tag="en-GB">language/en-GB/en-GB.plg_pcs_shipping_dpd.ini</language>
+			<language tag="en-GB">language/en-GB/en-GB.plg_pcs_shipping_dpd.sys.ini</language>
+		</languages>
+	</administration>
+	<form>
+        <!-- addpath="/plugins/pcs/shipping_dpd/models/fields" -->
+        <fields name="params" addfieldpath="/administrator/components/com_phocacart/models/fields">
+            <fieldset name="shipping" group="pcs">
+
+                <field name="display_opening_hours" default="0" type="list" label="PLG_PCS_SHIPPING_DPD_FIELD_SAVE_DISPLAY_OPENING_HOURS_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_SAVE_DISPLAY_OPENING_HOURS_DESC">
+                    <option value="0">PLG_PCS_SHIPPING_DPD_NO</option>
+                    <option value="1">PLG_PCS_SHIPPING_DPD_YES</option>
+                </field>
+
+
+                <field name="sender_name" type="text" default="" label="PLG_PCS_SHIPPING_DPD_FIELD_SENDER_NAME_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_SENDER_NAME_DESC"/>
+
+                <field name="payment_zero" type="PhocacartShippingParamsPayment" multiple="true" label="PLG_PCS_SHIPPING_DPD_FIELD_ZERO_PRICE_PAYMENT_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_ZERO_PRICE_PAYMENT_DESC" layout="joomla.form.field.list-fancy-select" size="1"/>
+
+                <field name="status_zero" type="PhocacartShippingParamsOrderStatus" multiple="true" label="PLG_PCS_SHIPPING_DPD_FIELD_ZERO_PRICE_ORDER_STATUS_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_ZERO_PRICE_ORDER_STATUS_DESC" layout="joomla.form.field.list-fancy-select" size="1">
+                </field>
+
+                <field name="save_changes" default="1" type="list" label="PLG_PCS_SHIPPING_DPD_FIELD_SAVE_CUSTOM_CHANGES_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_SAVE_CUSTOM_CHANGES_DESC">
+                    <option value="1">PLG_PCS_SHIPPING_DPD_YES</option>
+                    <option value="0">PLG_PCS_SHIPPING_DPD_NO</option>
+                </field>
+
+                <field name="validate_pickup_point" default="1" type="list" label="PLG_PCS_SHIPPING_DPD_FIELD_VALIDATE_PICK_UP_POINT_LABEL" description="PLG_PCS_SHIPPING_DPD_FIELD_VALIDATE_PICK_UP_POINT_DESC">
+                    <option value="1">PLG_PCS_SHIPPING_DPD_YES</option>
+                    <option value="0">PLG_PCS_SHIPPING_DPD_NO</option>
+                </field>
+
+            </fieldset>
+        </fields>
+
+    </form>
+	
+
+	<updateservers>
+		<server type="extension" name="PLG_PCS_SHIPPING_DPD" priority="1"><![CDATA[https://raw.githubusercontent.com/PhocaCz/PhocaCartShippingDpdPlugin/main/manifest.xml]]></server>
+	</updateservers>
+</extension>

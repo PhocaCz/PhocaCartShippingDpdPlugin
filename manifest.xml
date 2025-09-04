@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<updates>
+	<update>
+		<name><![CDATA[ Phoca Cart Shipping DPD Plugin ]]></name>
+		<description><![CDATA[ Phoca Cart Shipping - Shipping DPD Plugin - shipping method for Phoca Cart component. ]]></description>
+		<element>shipping_dpd</element>
+		<folder>pcs</folder>
+		<type>plugin</type>
+		<version>5.0.0</version>
+		<infourl title="Phoca Cart Shipping DPD Plugin 5.0.0">https://www.phoca.cz/</infourl>
+		<downloads>
+			<downloadurl type="full" format="zip">https://github.com/PhocaCz/PhocaCartShippingDpdPlugin/releases/download/5.0.0/plg_pcs_shipping_dpd_v5.0.0.zip</downloadurl>
+		</downloads>
+		<sha512>f4566f07834a24280132d0fb44b2bb57c544237a6f8d617a8653d919b08f3dbdf7fef52ae948c19683478cba518c4d7e3976d98ae0e310e8d35a42017b40426e</sha512>
+		<tags>
+			<tag>stable</tag>
+		</tags>
+		<maintainer><![CDATA[ Phoca.cz ]]></maintainer>
+		<maintainerurl>https://www.phoca.cz/</maintainerurl>
+		<section>Updates</section>
+		<targetplatform name="joomla" version="5\.*"/>
+		<client>site</client>
+	</update>
+</updates>

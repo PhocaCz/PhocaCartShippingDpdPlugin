@@ -1,0 +1,84 @@
+.ph-checkout-dpd-box {
+    margin-left: 1em;
+}
+
+.ph-checkout-dpd-box .btn.ph-btn-dpd-select-pickup-point {
+    background: #dc0032;
+    color: #fff;
+    margin: 0.25em 0;
+}
+
+.ph-checkout-shipping-info-box.ph-checkout-dpd-info-box {
+   /*display: inline-block;*/
+   clear:both;
+   display: block;
+   margin: 0;
+   padding: 0;
+   padding-left: 0.25em;
+}
+/*
+.ph-checkout-dpd-box {
+    container-type: inline-size;
+    container-name: phCheckoutDpdBox;
+}
+
+@container phCheckoutDpdBox (max-width: 46em) {
+    .ph-checkout-shipping-info-box.ph-checkout-dpd-info-box {
+        display:block;
+    }
+}
+
+.ph-checkout-shipping-row-item {
+    container-type: inline-size;
+    container-name: phCheckoutShippingRowItem;
+}
+
+@container phCheckoutShippingRowItem (max-width: 46em) {
+    .ph-checkout-shipping-info-box.ph-checkout-dpd-info-box {
+        display: block;
+    }
+}
+*/
+.ph-checkout-dpd-info-name {
+    padding: 0.5em;
+}
+.ph-checkout-dpd-info-container {
+    margin-top: 0.5em;
+   /* display: flex;
+    flex-wrap: wrap;*/
+}
+.ph-checkout-dpd-info-label {
+    padding-top: 0;
+}
+
+.ph-checkout-dpd-info-opening-hours {
+    padding: 0.5em;
+}
+
+.ph-checkout-dpd-box .ph-checkout-dpd-info-opening-hours {
+    padding: 0.5em;
+    font-size: small;
+   /* margin-left: -1em;
+    margin-right: -1em;*/
+}
+
+.ph-checkout-dpd-info-opening-hours > div{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    grid-gap: 0.25rem;
+}
+
+.ph-checkout-dpd-info-box {
+    container-type: inline-size;
+    container-name: phCheckoutShippingInfoBox;
+}
+
+@container phCheckoutShippingInfoBox (max-width: 12em) {
+    .ph-checkout-dpd-box .ph-checkout-dpd-info-opening-hours {
+        padding: 0;
+    }
+}
+
+.ph-checkout-dpd-info-photo img {
+    border-radius: 3px;
+}

@@ -1,0 +1,20 @@
+{
+	"author": "Jan Pavelka (www.phoca.cz)",
+	"authorUrl": "https://www.phoca.cz",
+	"copyright": "Jan Pavelka",
+	"license": "GNU/GPL",
+	"projectName": "PhocaCartShippingDpdPlugin",
+	"extensionName": "Phoca Cart Shipping DPD Plugin",
+	"projectInitials" : "PC",				  
+	"description": "Phoca Cart Shipping - Shipping DPD Plugin - shipping method for Phoca Cart component.",
+	"projectUrl": "https://www.phoca.cz/phocacart-extensions/2-plugins/136-phoca-cart-shipping-dpd-plugin",
+	"projectDocumentationUrl": "https://www.phoca.cz/documentation/category/115-phoca-cart",
+	"projectMainComponent": "Phoca Cart",
+	"projectMainComponentInfoUrl": "https://www.phoca.cz/project/phocacart-joomla-ecommerce",
+	"projectDemo" : {
+		"Joomla! - Phoca Cart Demo": "https://www.phoca.cz/phocacartdemo/",
+		"Joomla! - Phoca Cart - Phoca Premiere Template Demo": "https://www.phoca.cz/phocacartdemo/premiere/"
+	},
+	"projectColor": "#129ed9",
+	"projectBranch": "main"
+}

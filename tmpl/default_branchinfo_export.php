@@ -35,38 +35,70 @@ if (!empty($orders)) {
         $paramsShipping = json_decode($v->params_shipping);
 
         $id = (int)$v->id;
-        $eA[$id][]   = ['orderNumber' => $v->order_number];
-        $eA[$id][]   = ['senderLabel' => $senderName];
 
-        $eA[$id][] = $v->us1_name_first != '' ? ['name' => $v->us1_name_first] : ['name' => $v->us0_name_first];// first shipping then billing
-        $eA[$id][] = $v->us1_name_last != '' ? ['surname' => $v->us1_name_last] : ['surname' => $v->us0_name_last];
 
+        // Name
+        $nameFirst = $v->us1_name_first != '' ? $v->us1_name_first : $v->us0_name_first;
+        $nameLast = $v->us1_name_last != '' ? $v->us1_name_last : $v->us0_name_last;
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_NAME') => $nameFirst . ' '.$nameLast];
+
+        // Company
         $company    = $v->us1_company != '' ? $v->us1_company : $v->us0_company;
         if ($company != '') {
-            $eA[$id][] = ['company' => $company];
+            $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_COMPANY') => $company];
         }
 
-        $eA[$id][] = $v->us1_email != '' ? ['emailAddress' => $v->us1_email] : ['emailAddress' => $v->us0_email];
+        // Address
+        $address = $v->us1_address_1 != '' ? $v->us1_address_1 : $v->us0_address_1;
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ADDRESS') => $address];
 
+        // City
+        $city = $v->us1_city != '' ? $v->us1_city : $v->us0_city;
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_CITY') => $city];
+
+        // ZIP
+        $zip = $v->us1_zip != '' ? $v->us1_zip : $v->us1_zip;
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ZIP') => $zip];
+
+        // Country
+        $countryId = $v->us1_country != '' ? $v->us1_country : $v->us1_country;
+
+        $db = Factory::getDBO();
+		$query = 'SELECT a.code2'
+		. ' FROM #__phocacart_countries AS a'
+		. ' WHERE a.id = '.(int)$countryId
+        . ' LIMIT 1';
+		$db->setQuery( $query );
+		$countryCode = $db->loadResult();
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_COUNTRY') => $countryCode];
+
+        // Phone
         if ($v->us1_phone_1 != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us1_phone_1];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us1_phone_1];
         } else if ($v->us0_phone_1 != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us0_phone_1];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us0_phone_1];
         } else if ($v->us1_phone_2 != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us1_phone_2];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us1_phone_2];
         } else if ($v->us0_phone_2 != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us0_phone_2];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us0_phone_2];
         } else if ($v->us1_phone_mobile != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us1_phone_mobile];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us1_phone_mobile];
         } else if ($v->us0_phone_mobile != '') {
-            $eA[$id][] = ['phoneNumber' => $v->us0_phone_mobile];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_PHONE') => $v->us0_phone_mobile];
         } else {
             //$eA[$id][] = ['phoneNumber' => ''];// no empty value
         }
 
+        // Email
+        $eA[$id][] = $v->us1_email != '' ? [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_EMAIL') => $v->us1_email] : [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_EMAIL') => $v->us0_email];
+
+        // Order Number
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ORDER_NUMBER') => $v->order_number];
+        //$eA[$id][]   = ['senderLabel' => $senderName];
+
         $currency    = $v->currency_code;
         if ($currency != '') {
-            $eA[$id][] = ['currency' => $currency];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ORDER_CURRENCY') => $currency];
         }
         // COD
         $round = 0;
@@ -75,20 +107,19 @@ if (!empty($orders)) {
         }
         // Here additional currencies can have own rules
 
-
         if (isset($additionalParameters['totalPay'][$id])) {
             // To Pay set by the form field in orders view
             $changeTotalPay = round($additionalParameters['totalPay'][$id], $round);
-            $eA[$id][]   = ['cod' => $changeTotalPay];
+            $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_TO_PAY') => $changeTotalPay];
 
         } else {
             $changeTotalPay = round($v->total_amount, $round);
-            $eA[$id][]   = ['cod' => $changeTotalPay];
+            $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_TO_PAY') => $changeTotalPay];
         }
 
 
 
-        $eA[$id][]   = ['value' => round($v->total_amount, $round)];
+        $eA[$id][]   = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ORDER_VALUE') => round($v->total_amount, $round)];
 
 
         $unitWeight = $v->unit_weight;
@@ -106,7 +137,7 @@ if (!empty($orders)) {
         }
 
         if ($weightKg != '' && $weightKg != 0) {
-            $eA[$id][] = ['weightKg' => $weightKg];
+            $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_WEIGHT') => $weightKg];
         }
 
         if ($weightKg != '') {
@@ -130,22 +161,24 @@ if (!empty($orders)) {
             }
         }*/
 
-        $eA[$id][]   = ['type' => $paramsShipping->type];
-        $eA[$id][]   = ['subtype' => $paramsShipping->subtype];
+       // $eA[$id][]   = ['type' => $paramsShipping->type];
+      //  $eA[$id][]   = ['subtype' => $paramsShipping->subtype];
+
+        $eA[$id][] = [Text::_('PLG_PCS_SHIPPING_DPD_CSV_HEADER_ID_PICKUP_POINT') => $paramsShipping->id];
 
 
-        $eA[$id][]['destination'] = [
+       /* $eA[$id][]['destination'] = [
             'pickupPointOrCarrier' => $paramsShipping->id,
             /*'street' => $street,
             'houseNumber' => $houseNumber,
             'city' => $paramsShipping->city,
-            'zip' => $paramsShipping->zip,*/
+            'zip' => $paramsShipping->zip,*//*
             'name' => $paramsShipping->name,
             'municipality_district_name' => $paramsShipping->municipality_district_name,
             'municipality_name' => $paramsShipping->municipality_name,
             'address' => $paramsShipping->address,
             'country' => $paramsShipping->country
-        ];
+        ];*/
 
 
         // Selectbox
@@ -176,8 +209,27 @@ if (!empty($orders)) {
     }
 
 
-    $t = "\t";
-    $oXml = [];
+    $oCsv = [];
+    $oCsvHeader = [];
+
+    if (!empty($eA)) {
+        $i = 0;
+        foreach ($eA as $k => $v) {
+            if (!empty($v)){
+                foreach ($v as $k2 => $v2) {
+                    $key = key($v2);
+
+                    if ($i == 0) {
+                        $oCsvHeader[] = '"' . $key . '"';
+                    }
+                    $oCsv[$k][] = '"'.$v2[$key].'"';
+                }
+            }
+            $i++;
+        }
+    }
+
+    /*
     if (!empty($eA)) {
         $oXml[] = '<parcels version="1">';
         foreach ($eA as $k => $v) {
@@ -214,36 +266,41 @@ if (!empty($orders)) {
 
         $oXml[] = '</parcels>';
     }
+    */
 
 
+    if (!empty($oCsvHeader)){
 
-    if (!empty($oXml)){
+        $fileCsv = implode(",", $oCsvHeader);
 
-        $fileXml = implode("\n", $oXml);
-
-        $date = date("Y-m-d-H-i-s");
-
-
-        // Update the info about exported
-        if (!empty($ordersSave)) {
-            $db = Factory::getDBO();
-            foreach ($ordersSave as $k => $v) {
-
-                if ((int)$k > 0 && $v != '') {
-
-                    $query = 'UPDATE #__phocacart_orders SET'
-                        . ' params_shipping = ' . $db->quote($v) . ''
-                        . ' WHERE id = ' . (int)$k;
-                    $db->setQuery($query);
-                    $db->execute();
-                }
-
+        if (!empty($oCsv)) {
+            foreach ($oCsv as $k => $v) {
+                $fileCsv .= "\n" . implode(",", $v);
             }
+
+            $date = date("Y-m-d-H-i-s");
+
+
+            // Update the info about exported
+            if (!empty($ordersSave)) {
+                $db = Factory::getDBO();
+                foreach ($ordersSave as $k => $v) {
+
+                    if ((int)$k > 0 && $v != '') {
+
+                        $query = 'UPDATE #__phocacart_orders SET'
+                            . ' params_shipping = ' . $db->quote($v) . ''
+                            . ' WHERE id = ' . (int)$k;
+                        $db->setQuery($query);
+                        $db->execute();
+                    }
+
+                }
+            }
+
+            PhocacartDownload::downloadContent($fileCsv, '', '', $date . '-' . Text::_('PLG_PCS_SHIPPING_DPD_EXPORT_FILENAME') . '.csv', 'text/csv');
+            exit;
         }
-
-        PhocacartDownload::downloadContent($fileXml, '', '', $date .'-'. Text::_('PLG_PCS_SHIPPING_DPD_EXPORT_FILENAME') . '.xml', 'application/xml');
-        exit;
-
     }
 }
 

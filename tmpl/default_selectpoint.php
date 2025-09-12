@@ -17,7 +17,6 @@ $idCheckbox = 'phshippingopt'.$id;
 $s          = PhocacartRenderStyle::getStyles();
 $t          = [];
 $layoutAAQ	= new FileLayout('popup_container_iframe', null, array('component' => 'com_phocacart'));
-$type       = $item->params->get('type', 'BALIKOVNY');
 
 
 $attributeToggle = '';

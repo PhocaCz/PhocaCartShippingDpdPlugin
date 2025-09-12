@@ -66,9 +66,9 @@ class plgPCSShipping_Dpd extends CMSPlugin
                 . ' t.amount AS total_amount,'
                 . ' s.id AS shippingid, s.title AS shippingtitle, s.tracking_link as shippingtrackinglink, s.tracking_description as shippingtrackingdescription, os.orders_view_display as ordersviewdisplay,'
 
-                . ' us0.name_first as us0_name_first, us0.name_last as us0_name_last, us0.company as us0_company, us0.email as us0_email, us0.phone_1 as us0_phone_1, us0.phone_2 as us0_phone_2, us0.phone_mobile as us0_phone_mobile,'
+                . ' us0.name_first as us0_name_first, us0.name_last as us0_name_last, us0.company as us0_company, us0.email as us0_email, us0.phone_1 as us0_phone_1, us0.phone_2 as us0_phone_2, us0.phone_mobile as us0_phone_mobile, us0.address_1 as us0_address_1, us0.city as us0_city, us0.zip as us0_zip, us0.country as us0_country,'
 
-                . ' us1.name_first as us1_name_first, us1.name_last as us1_name_last, us1.company as us1_company, us1.email as us1_email, us1.phone_1 as us1_phone_1, us1.phone_2 as us1_phone_2, us1.phone_mobile as us1_phone_mobile'
+                . ' us1.name_first as us1_name_first, us1.name_last as us1_name_last, us1.company as us1_company, us1.email as us1_email, us1.phone_1 as us1_phone_1, us1.phone_2 as us1_phone_2, us1.phone_mobile as us1_phone_mobile, us1.address_1 as us1_address_1, us1.city as us1_city, us1.zip as us1_zip, us1.country as us1_country'
 
                 . ' FROM #__phocacart_orders AS o'
                 . ' LEFT JOIN #__phocacart_order_statuses AS os ON os.id = o.status_id'

@@ -10,7 +10,7 @@ function phGetDpdSelectedShippingMethod() {
     let selectedShippingMethod = null;
     
     for (let i = 0; i < infoElements.length; i++) {
-        if (infoElements[i].checked) {
+        if (infoElements[i].checked && phParamsPlgPcsDpd[infoElements[i].value]) {
             selectedShippingMethod = infoElements[i].value;
             break;
         }

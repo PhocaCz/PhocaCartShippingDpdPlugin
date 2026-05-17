@@ -2,7 +2,7 @@
 <extension type="plugin" group="pcs" method="upgrade" version="6.0">
 	<name>plg_pcs_shipping_dpd</name>
 	<author>Jan Pavelka (www.phoca.cz)</author>
-	<creationDate>20/04/2026</creationDate>
+	<creationDate>15/05/2026</creationDate>
 	<authorEmail></authorEmail>
 	<authorUrl>https://www.phoca.cz</authorUrl>
 	<copyright>Jan Pavelka</copyright>

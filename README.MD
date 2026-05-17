@@ -54,10 +54,6 @@ Phoca Cart Shipping - Shipping DPD Plugin - shipping method for Phoca Cart compo
 
 
 
-## Version (Joomla! 5.x)
-
-5.2.1
-
 
 
 ## License
